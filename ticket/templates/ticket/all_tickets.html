@@ -1,0 +1,22 @@
+{% include 'includes/navbar.html' %}
+
+<h1>All Tickets : {{count}}</h1>
+<hr>
+
+    {% for ticket in tickets %}
+        <div class="ticket">
+            
+            <h2>{{ ticket.subject }}</h2>
+            <p>{{ ticket.description }}</p>
+            
+
+            {% if request.user.is_superuser %}
+            <a class="btn btn-primary" href="{% url 'ticket:detail' ticket.id %}">reply</a>
+            <a class="btn btn-danger" href="{% url 'ticket:delete' ticket.id %}">Delete</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'ticket:detail' ticket.id %}">result</a>
+            <a class="btn btn-danger" href="{% url 'ticket:delete' ticket.id %}">Delete</a>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}

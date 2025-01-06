@@ -1,0 +1,58 @@
+{% include 'includes/navbar.html' %}
+
+<div class="ticket">
+    <h2>Subject : {{ ticket.subject }}</h2>
+    <h4>Description : {{ ticket.description }}</h4>
+    <h4>Status : {{ticket.status}}</h4>
+    <h4>Created at : {{ticket.created_at}}</h4>
+    <img width="300px" height="300px" src="{{ticket.file.url}}" alt="">
+    <hr>
+</div>
+{% if request.user.is_superuser %}
+<h3>Replies:</h3>
+{% for message in messages %}
+<div class="message">
+    {% if message.user.is_superuser %}
+    <strong>Admin</strong>
+    {% else %}
+    <strong>You</strong>
+    {% endif %}
+    <p><strong>{{ message.user_message }}</strong></p>
+    <small>{{ message.created_at }}</small>
+    <hr>
+</div>
+{% endfor %}
+
+<h3>New Message</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning">Send</button>
+</form>
+
+
+
+
+{% else %}
+<h3>My Answer:</h3>
+{% for message in messages %}
+<div class="message">
+    {% if message.user.is_superuser %}
+    <strong>Admin</strong>
+    {% else %}
+    <strong>You</strong>
+    {% endif %}
+    
+    <p>{{ message.user_message }}</p>
+    <small>{{ message.created_at }}</small>
+    <hr>
+</div>
+{% endfor %}
+
+<h3>New Message</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning">Send</button>
+</form>
+{% endif %}
