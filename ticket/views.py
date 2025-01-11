@@ -3,6 +3,8 @@ from .forms import TicketForm, MessageForm
 from .models import Ticket, Message
 import pandas as pd
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from .serializers import TicketSerializers
 
 @login_required
 def ticket(request):
@@ -54,3 +56,6 @@ def ticket_detail(request, pk):
     })
     
 
+class TicketList(viewsets.ModelViewSet):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializers
