@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 class TicketSerializers(serializers.ModelSerializer):
     # user_name = serializers.SerializerMethodField()
+    user = serializers.SlugRelatedField(queryset=User.objects.all(),slug_field ='username')
+    
     class Meta:
         model = Ticket
         fields = '__all__'
