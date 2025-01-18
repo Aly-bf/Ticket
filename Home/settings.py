@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'drf_spectacular',
-    # 'pytest_django'
+
 ]
 
 MIDDLEWARE = [
@@ -82,10 +82,17 @@ WSGI_APPLICATION = 'Home.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'ticket',
     }
 }
 
@@ -164,5 +171,3 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-# [pytest]
-# DJANGO_SETTINGS_MODULE = ticket.settings
